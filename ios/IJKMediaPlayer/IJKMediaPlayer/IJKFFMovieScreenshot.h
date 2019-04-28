@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IJKFFMovieScreenshot : NSObject
 
-+ (UIImage *)screenshotWithVideo:(NSString *)path forSeconds:(CGFloat)seconds;
++ (nullable UIImage *)screenshotWithVideo:(NSString *)path forSeconds:(CGFloat)seconds;
 
 @end
 
