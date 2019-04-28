@@ -33,6 +33,11 @@
 
 - (instancetype)initWithVideo:(NSString *)path {
     if (self = [super init]) {
+        _formatContext = NULL;
+        _videoFrame = NULL;
+        _codecContext = NULL;
+        _videoStream = -1;
+        
         av_register_all();
         if (![self openVideo:path]) {
             return nil;
@@ -50,14 +55,16 @@
 }
 
 - (void)dealloc {
-    if (_formatContext) {
-        avformat_free_context(_formatContext);
+    if (_codecContext) {
+        avcodec_close(_codecContext);
     }
+
     if (_videoFrame) {
         av_frame_free(&_videoFrame);
     }
-    if (_codecContext) {
-        avcodec_close(_codecContext);
+
+    if (_formatContext) {
+        avformat_free_context(_formatContext);
     }
 }
 
